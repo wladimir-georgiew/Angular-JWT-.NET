@@ -1,6 +1,7 @@
 using ArtCave.Data;
 using ArtCave.Data.Entities;
 using ArtCave.Web.Data;
+using ArtCave.Web.Services.Account;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,13 +19,22 @@ namespace ArtCave.Web
             builder.Services.AddDbContext<ArtCaveDbContext>(options =>
                 options.UseSqlServer(connectionString));
 
-            builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+            builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+            {
+                options.Password.RequireLowercase = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireDigit = false;
+            })
                    .AddEntityFrameworkStores<ArtCaveDbContext>();
 
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddAutoMapper(typeof(Program));
+
+            builder.Services.AddScoped(typeof(IBaseCrudOperations<>), typeof(BaseCrudOperations<>));
+            builder.Services.AddTransient<IAccountService, AccountService>();
 
             var app = builder.Build();
 

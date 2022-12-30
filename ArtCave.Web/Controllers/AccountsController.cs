@@ -1,7 +1,6 @@
 ﻿using ArtCave.Data.Entities;
 using ArtCave.Web.DTO.Registration;
-using AutoMapper;
-using Microsoft.AspNetCore.Identity;
+using ArtCave.Web.Services.Account;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ArtCave.Web.Controllers
@@ -10,29 +9,24 @@ namespace ArtCave.Web.Controllers
     [Route("[controller]")]
     public class AccountsController : ControllerBase
     {
-        private readonly UserManager<ApplicationUser> _userManager;
-        private readonly IMapper _mapper;
-        public AccountsController(UserManager<ApplicationUser> userManager, IMapper mapper)
+        private readonly IAccountService _accountService;
+
+        public AccountsController(IAccountService accountService)
         {
-            _userManager = userManager;
-            _mapper = mapper;
+            _accountService = accountService;
         }
-        [HttpPost("Registration")]
-        public async Task<IActionResult> RegisterUser([FromBody] UserRegistrationRequest userForRegistration)
+
+        [HttpPost("register")]
+        public async Task<IActionResult> RegisterUser([FromBody] UserRegistrationRequest userRequestModel)
         {
-            if (userForRegistration == null || !ModelState.IsValid)
+            if (userRequestModel == null || !ModelState.IsValid)
                 return BadRequest();
 
-            var user = _mapper.Map<ApplicationUser>(userForRegistration);
-            var result = await _userManager.CreateAsync(user, userForRegistration.Password);
-            if (!result.Succeeded)
-            {
-                var errors = result.Errors.Select(e => e.Description);
+            var response = await _accountService.RegisterUserAsync(userRequestModel);
 
-                return BadRequest(new UserRegistrationResponse { Errors = errors });
-            }
-
-            return Ok(new UserRegistrationResponse { IsSuccessfulRegistration = true });
+            return response.IsSuccessfulRegistration
+                ? Ok(response)
+                : BadRequest(response);
         }
     }
 }

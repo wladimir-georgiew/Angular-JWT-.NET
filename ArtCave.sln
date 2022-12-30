@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33110.190
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArtCave.Web", "ArtCave.Web\ArtCave.Web.csproj", "{6BFBEE29-0AEB-4293-BB70-53AD7088A731}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6BFBEE29-0AEB-4293-BB70-53AD7088A731}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6BFBEE29-0AEB-4293-BB70-53AD7088A731}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6BFBEE29-0AEB-4293-BB70-53AD7088A731}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6BFBEE29-0AEB-4293-BB70-53AD7088A731}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8B216575-665F-42BF-9FEA-B23C090F0BA7}
+	EndGlobalSection
+EndGlobal

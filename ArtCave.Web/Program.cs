@@ -1,7 +1,7 @@
-using ArtCave.Data;
 using ArtCave.Data.Entities;
 using ArtCave.Web.Data;
 using ArtCave.Web.Services.Account;
+using ArtCave.Web.Services.BaseCrud;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 

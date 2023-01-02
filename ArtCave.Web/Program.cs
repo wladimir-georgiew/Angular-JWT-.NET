@@ -38,6 +38,12 @@ namespace ArtCave.Web
 
             var app = builder.Build();
 
+            app.UseCors(options => options
+                        .AllowAnyOrigin()
+                        .AllowAnyHeader()
+                        .AllowAnyMethod()
+                       );
+
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
@@ -48,7 +54,6 @@ namespace ArtCave.Web
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
-
 
             app.MapControllers();
 

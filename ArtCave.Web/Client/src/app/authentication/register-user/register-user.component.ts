@@ -1,8 +1,10 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+
 import { UserRegistrationRequest } from './../../_interfaces/Registration/UserRegistrationRequest.model';
 import { AuthenticationService } from './../../services/authentication.service';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-register-user',
@@ -11,8 +13,10 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class RegisterUserComponent implements OnInit {
   registerForm: FormGroup;
+  errorMessage: string = '';
+  showError: boolean;
 
-  constructor(private authService: AuthenticationService) { }
+  constructor(private authService: AuthenticationService, private router: Router) { }
 
   ngOnInit(): void {
     this.registerForm = new FormGroup({
@@ -32,7 +36,8 @@ export class RegisterUserComponent implements OnInit {
     return this.registerForm.get(controlName).hasError(errorName)
   }
 
-  public registerUser = (registerFormValue : UserRegistrationRequest) => {
+  public registerUser = (registerFormValue: UserRegistrationRequest) => {
+    this.showError = false;
     const formValues = { ...registerFormValue };
 
     const user: UserRegistrationRequest = {
@@ -44,9 +49,12 @@ export class RegisterUserComponent implements OnInit {
     };
 
     this.authService.registerUser("accounts/register", user)
-    .subscribe({
-      next: (_) => console.log("Successful registration"),
-      error: (err: HttpErrorResponse) => console.log(err.error.errors)
-    })
+      .subscribe({
+        next: (_) => this.router.navigate(["/authentication/login"]),
+        error: (err: HttpErrorResponse) => {
+          this.errorMessage = err.message;
+          this.showError = true;
+        }
+      })
   }
 }

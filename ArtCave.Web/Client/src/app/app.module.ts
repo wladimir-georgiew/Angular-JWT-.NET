@@ -1,6 +1,7 @@
+import { ErrorHandlerService } from './services/error-handler.service';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -11,6 +12,7 @@ import { LayoutComponent } from './layout/layout.component';
 import { HeaderComponent } from './navigation/header/header.component';
 import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.component';
 import { HomeComponent } from './home/home.component';
+import { NotFoundComponent } from './error-pages/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,8 @@ import { HomeComponent } from './home/home.component';
     LayoutComponent,
     HeaderComponent,
     SidenavListComponent,
-    HomeComponent
+    HomeComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +32,13 @@ import { HomeComponent } from './home/home.component';
     BrowserAnimationsModule,
     MaterialModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorHandlerService,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

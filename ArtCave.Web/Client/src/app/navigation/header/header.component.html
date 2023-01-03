@@ -8,7 +8,12 @@
     <div>
         <a routerLink="/home">Home</a>
     </div>
-    <div>
+    <div *ngIf='!isUserAuthenticated'>
+        <a routerLink="/authentication/login">Login</a>
         <a routerLink="/authentication/register">Register</a>
     </div>
+    <div *ngIf='isUserAuthenticated'>
+        <button (click)='logout()'>Logout</button>
+    </div>
+
 </mat-toolbar>

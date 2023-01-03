@@ -1,7 +1,11 @@
 ﻿using ArtCave.Data.Entities;
+using ArtCave.Web.DTO.Login;
 using ArtCave.Web.DTO.Registration;
+using ArtCave.Web.JwtFeatures;
 using AutoMapper;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace ArtCave.Web.Services.Account
 {
@@ -9,11 +13,13 @@ namespace ArtCave.Web.Services.Account
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IMapper _mapper;
+        private readonly JwtHandler _jwtHandler;
 
-        public AccountService(UserManager<ApplicationUser> userManager, IMapper mapper)
+        public AccountService(UserManager<ApplicationUser> userManager, IMapper mapper, JwtHandler jwtHandler)
         {
             _userManager = userManager;
             _mapper = mapper;
+            _jwtHandler = jwtHandler;
         }
 
         public async Task<UserRegistrationResponse> RegisterUserAsync(UserRegistrationRequest userRequestModel)
@@ -29,6 +35,29 @@ namespace ArtCave.Web.Services.Account
             }
 
             return new UserRegistrationResponse { IsSuccessfulRegistration = true };
+        }
+
+        public async Task<UserLoginResponse> Login(UserLoginRequest request)
+        {
+            var user = await _userManager.FindByNameAsync(request.Email);
+
+            if (user == null || !await _userManager.CheckPasswordAsync(user, request.Password))
+                return new UserLoginResponse
+                {
+                    ErrorMessage = "Invalid username and/or password"
+                };
+
+            var signingCredentials = _jwtHandler.GetSigningCredentials();
+            var claims = _jwtHandler.GetClaims(user);
+            var tokenOptions = _jwtHandler.GenerateTokenOptions(signingCredentials, claims);
+
+            var token = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
+
+            return new UserLoginResponse 
+            {
+                IsAuthSuccessful = true,
+                Token = token
+            };
         }
     }
 }

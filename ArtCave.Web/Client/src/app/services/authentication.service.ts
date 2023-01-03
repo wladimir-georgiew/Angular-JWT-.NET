@@ -9,10 +9,8 @@ import { EnvironmentUrlService } from './environment-url.service';
 })
 export class AuthenticationService {
   constructor(private http: HttpClient, private envUrl: EnvironmentUrlService) { }
+
   public registerUser = (route: string, body: UserRegistrationRequest) => {
-    return this.http.post<UserRegistrationResponse> (this.createCompleteRoute(route, this.envUrl.urlAddress), body);
-  }
-  private createCompleteRoute = (route: string, envAddress: string) => {
-    return `${envAddress}/${route}`;
+    return this.http.post<UserRegistrationResponse>(`${this.envUrl.urlAddress}/${route}`, body);
   }
 }

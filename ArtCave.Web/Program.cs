@@ -1,9 +1,13 @@
 using ArtCave.Data.Entities;
 using ArtCave.Web.Data;
+using ArtCave.Web.JwtFeatures;
 using ArtCave.Web.Services.Account;
 using ArtCave.Web.Services.BaseCrud;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace ArtCave.Web
 {
@@ -28,10 +32,32 @@ namespace ArtCave.Web
             })
                    .AddEntityFrameworkStores<ArtCaveDbContext>();
 
+            var jwtSettings = builder.Configuration.GetSection(JwtSettingsConstants.JwtSettings);
+            builder.Services.AddAuthentication(opt =>
+            {
+                opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = jwtSettings[JwtSettingsConstants.Issuer],
+                    ValidAudience = jwtSettings[JwtSettingsConstants.Issuer],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8
+                        .GetBytes(jwtSettings.GetSection(JwtSettingsConstants.Key).Value!))
+                };
+            });
+
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddAutoMapper(typeof(Program));
+
+            builder.Services.AddScoped<JwtHandler>();
 
             builder.Services.AddScoped(typeof(IBaseCrudOperations<>), typeof(BaseCrudOperations<>));
             builder.Services.AddTransient<IAccountService, AccountService>();
@@ -50,11 +76,10 @@ namespace ArtCave.Web
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
-
-            app.UseHttpsRedirection();
-
+            app.UseAuthentication();
             app.UseAuthorization();
-
+            app.UseHttpsRedirection();
+            app.UseAuthorization();
             app.MapControllers();
 
             app.Run();

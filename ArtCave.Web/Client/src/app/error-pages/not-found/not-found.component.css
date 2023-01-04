@@ -1,11 +1,20 @@
-p{
-    font-weight: bold;
-    font-size: 50px;
-    text-align: center;
-    color: #f10b0b;
-}
 .error-message-wrapper{
-    margin:20px;
-    width: 100%;
-    height: 100%;
+    margin-top:8rem;
+}
+
+.error-message-wrapper > h1{
+    font-weight: bold;
+    font-size: 70px;
+    text-align: center;
+    color: #b13434;
+}
+
+.error-message-wrapper > p{
+    font-weight: bold;
+    font-size: 45px;
+    text-align: center;
+    color: #473c3c;
+    margin-top:3rem;
+    margin-bottom:3rem;
+    line-height:3rem;
 }

@@ -32,7 +32,7 @@ namespace ArtCave.Web
             })
                    .AddEntityFrameworkStores<ArtCaveDbContext>();
 
-            var jwtSettings = builder.Configuration.GetSection(JwtSettingsConstants.JwtSettings);
+            var jwtSettings = builder.Configuration.GetSection(Constants.Constants.Jwt.JwtSettings);
             builder.Services.AddAuthentication(opt =>
             {
                 opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -45,10 +45,10 @@ namespace ArtCave.Web
                     ValidateAudience = true,
                     ValidateLifetime = true,
                     ValidateIssuerSigningKey = true,
-                    ValidIssuer = jwtSettings[JwtSettingsConstants.Issuer],
-                    ValidAudience = jwtSettings[JwtSettingsConstants.Issuer],
+                    ValidIssuer = jwtSettings[Constants.Constants.Jwt.Issuer],
+                    ValidAudience = jwtSettings[Constants.Constants.Jwt.Issuer],
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8
-                        .GetBytes(jwtSettings.GetSection(JwtSettingsConstants.Key).Value!))
+                        .GetBytes(jwtSettings.GetSection(Constants.Constants.Jwt.Key).Value!))
                 };
             });
 

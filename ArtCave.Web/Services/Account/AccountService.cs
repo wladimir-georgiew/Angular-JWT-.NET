@@ -34,6 +34,8 @@ namespace ArtCave.Web.Services.Account
                 return new UserRegistrationResponse { Errors = errors };
             }
 
+            await _userManager.AddToRoleAsync(user, Constants.Constants.IdentityRoles.FreeUser);
+
             return new UserRegistrationResponse { IsSuccessfulRegistration = true };
         }
 
@@ -48,7 +50,7 @@ namespace ArtCave.Web.Services.Account
                 };
 
             var signingCredentials = _jwtHandler.GetSigningCredentials();
-            var claims = _jwtHandler.GetClaims(user);
+            var claims = await _jwtHandler.GetClaimsAsync(user);
             var tokenOptions = _jwtHandler.GenerateTokenOptions(signingCredentials, claims);
 
             var token = new JwtSecurityTokenHandler().WriteToken(tokenOptions);

@@ -1,6 +1,8 @@
 ﻿using ArtCave.Data.Entities;
+using ArtCave.Web.Data.Seeders;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection.Emit;
 
 namespace ArtCave.Web.Data
 {
@@ -15,7 +17,7 @@ namespace ArtCave.Web.Data
         {
             base.OnModelCreating(builder);
 
-            // Add seed
+            builder.ApplyConfiguration(new RoleConfigurationSeeder());
         }
     }
 }

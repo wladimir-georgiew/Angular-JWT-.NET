@@ -5,6 +5,5 @@ import { Component } from '@angular/core';
   templateUrl: './not-found.component.html',
   styleUrls: ['./not-found.component.css']
 })
-export class NotFoundComponent {
-  public notFoundText: string = `404 Page not found`
-}
+
+export class NotFoundComponent { }

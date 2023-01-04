@@ -1,0 +1,33 @@
+.forbidden-message-wrapper {
+    margin-top: 8rem;
+}
+
+.forbidden-message-wrapper>h1 {
+    font-weight: bold;
+    font-size: 70px;
+    text-align: center;
+    color: #b13434;
+}
+
+.forbidden-message-wrapper>p {
+    font-weight: bold;
+    font-size: 45px;
+    text-align: center;
+    color: #473c3c;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    line-height: 3rem;
+}
+
+.forbidden-message-wrapper> p >button {
+    font-size: 45px;
+    background: none !important;
+    border: none;
+    padding: 0 !important;
+    padding-bottom:7px !important;
+    /*optional*/
+    /*input has OS specific font-family*/
+    color: #069;
+    text-decoration: none;
+    cursor: pointer;
+}

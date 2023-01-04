@@ -41,7 +41,7 @@ namespace ArtCave.Web.Controllers
 
             return response.IsAuthSuccessful
                 ? Ok(response)
-                : BadRequest(response);
+                : Unauthorized(response);
         }
     }
 }

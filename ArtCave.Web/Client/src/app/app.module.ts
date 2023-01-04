@@ -8,10 +8,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { JwtModule } from "@auth0/angular-jwt";
 import { MaterialModule } from './material/material.module'
 
+
 import { AppComponent } from './app.component';
 import { LayoutComponent } from './layout/layout.component';
 import { HeaderComponent } from './navigation/header/header.component';
-import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.component';
 import { HomeComponent } from './home/home.component';
 import { NotFoundComponent } from './error-pages/not-found/not-found.component';
 import { StandComponent } from './components/stand/stand.component';
@@ -26,7 +26,6 @@ export function tokenGetter() {
     AppComponent,
     LayoutComponent,
     HeaderComponent,
-    SidenavListComponent,
     HomeComponent,
     NotFoundComponent,
     StandComponent,

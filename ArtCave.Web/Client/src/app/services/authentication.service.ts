@@ -42,6 +42,22 @@ export class AuthenticationService {
     this.authChangeSub.next(isAuthenticated);
   }
 
+  public getUserRole() : string {
+    let token = localStorage.getItem("token");
+
+    if(token === null || token === undefined){
+      return "";
+    }
+
+    let decodedToken = this.jwtHelper.decodeToken(token);
+
+    if(decodedToken.role === null || decodedToken.role === undefined){
+      return "";
+    }
+
+    return decodedToken.role;
+  }
+
   private GetCompleteRoute(route : string) : string{
     return `${this.envUrl.urlAddress}/${route}`;
   }

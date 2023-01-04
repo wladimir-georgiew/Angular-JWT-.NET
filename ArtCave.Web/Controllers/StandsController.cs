@@ -13,7 +13,6 @@ namespace ArtCave.Web.Controllers
         }
 
         [HttpGet("all")]
-        [Authorize(Roles = Constants.Constants.IdentityRoles.Admin)]
         public IActionResult GetAllStands()
         {
             var mockStands = new List<string>()

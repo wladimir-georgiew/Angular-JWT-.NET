@@ -13,7 +13,11 @@ export class HeaderComponent implements OnInit {
   @Output() public sidenavToggle = new EventEmitter();
   
   constructor(private authService: AuthenticationService, private router : Router) {
-    this.isUserAuthenticated = localStorage.getItem('token') !== null;
+    this.authService.authChanged
+    .subscribe(res => {
+      this.isUserAuthenticated = res;
+    })
+
   }
 
   ngOnInit(): void {
@@ -30,5 +34,9 @@ export class HeaderComponent implements OnInit {
 
   public onToggleSidenav = () => {
     this.sidenavToggle.emit();
+  }
+
+  public isUserAdmin() : boolean {
+    return this.authService.getUserRole() === 'Admin';
   }
 }

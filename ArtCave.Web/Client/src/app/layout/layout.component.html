@@ -1,5 +1,37 @@
-<div fxLayout="row wrap" fxLayoutAlign="center center" class="layout-wrapper"> 
-    <div fxFlex="80%" fxFlex.lt-md="100%" class="flex-wrapper"> 
-        <ng-content></ng-content> 
-    </div> 
+<div class="layout-wrapper">
+    <div class="flex-wrapper">
+        <!-- Sidenav content -->
+        <mat-drawer-container class="example-container" autosize>
+            <mat-drawer #drawer class="admin-sidenav" mode="side">
+                <span>
+                    <label>Admin Panel</label>
+                    <button mat-icon-button type="button" (click)="drawer.toggle()">
+                        <mat-icon>menu</mat-icon>
+                    </button>
+                </span>
+            </mat-drawer>
+        </mat-drawer-container>
+        <!-- Sidenav content -->
+
+        <!-- Navigation -->
+        <mat-toolbar color="primary">
+            <button *ngIf='isUserAdmin()' mat-icon-button type="button" (click)="drawer.toggle()">
+                <mat-icon>menu</mat-icon>
+            </button>
+                <a class="nav-button" routerLink="/home">Home</a>
+            <div class="nav-auth-button" *ngIf='!isUserAuthenticated'>
+                <a class="nav-button" routerLink="/authentication/login">Login</a>
+                <a class="nav-button" routerLink="/authentication/register">Register</a>
+            </div>
+            <div *ngIf='isUserAuthenticated'>
+                <a class="nav-button" routerLink="/stand">Stand</a>
+            </div>
+            <button class="nav-button nav-logout-button" *ngIf='isUserAuthenticated' (click)='logout()'>Logout</button>
+        </mat-toolbar>
+        <!-- Navigation -->
+
+        <!-- Content -->
+        <ng-content></ng-content>
+        <!-- Content -->
+    </div>
 </div>

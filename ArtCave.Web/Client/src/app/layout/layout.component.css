@@ -1,6 +1,46 @@
-.layout-wrapper{ 
-    height: 100%; 
-} 
-.flex-wrapper{ 
-    height: 100%; 
+.layout-wrapper {
+    height: 100%;
+}
+
+.flex-wrapper {
+    height: 100%;
+}
+
+.nav-button {
+    text-decoration: none;
+    color: white;
+    background-color: none;
+    background: none;
+    border: none;
+    padding: 8px;
+    font-family: cursive;
+}
+
+.nav-button>a:hover,
+a:active {
+    color: red;
+}
+
+.nav-auth-button{
+    right: 1rem;
+    position: absolute;
+}
+
+.nav-logout-button{
+    right: 1rem;
+    position: absolute;
+    color:rgb(255 167 167);
+}
+
+.example-sidenav-content {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.admin-sidenav {
+    height: 100%;
+    position: fixed;
+    padding: 20px;
 }

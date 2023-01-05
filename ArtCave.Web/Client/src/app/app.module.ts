@@ -11,7 +11,6 @@ import { MaterialModule } from './material/material.module'
 
 import { AppComponent } from './app.component';
 import { LayoutComponent } from './layout/layout.component';
-import { HeaderComponent } from './navigation/header/header.component';
 import { HomeComponent } from './home/home.component';
 import { NotFoundComponent } from './error-pages/not-found/not-found.component';
 import { StandComponent } from './components/stand/stand.component';
@@ -25,7 +24,6 @@ export function tokenGetter() {
   declarations: [
     AppComponent,
     LayoutComponent,
-    HeaderComponent,
     HomeComponent,
     NotFoundComponent,
     StandComponent,

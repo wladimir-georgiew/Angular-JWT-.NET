@@ -1,24 +1,27 @@
 <div class="layout-wrapper">
     <div class="flex-wrapper">
-        <!-- Sidenav content -->
+        <!-- Admin Sidenav -->
         <mat-drawer-container class="example-container" autosize>
             <mat-drawer #drawer class="admin-sidenav" mode="side">
-                <span>
-                    <label>Admin Panel</label>
+                <div class="sidenav-header">
+                    <label class="sidenav-title">Admin Panel</label>
                     <button mat-icon-button type="button" (click)="drawer.toggle()">
-                        <mat-icon>menu</mat-icon>
+                        <mat-icon>keyboard_backspace</mat-icon>
                     </button>
-                </span>
+                </div>
+                <div class="sidenav-contents">
+                    <a class="sidenav-content-button" href="/admin-panel/create-stand">Create Stand</a>
+                </div>
             </mat-drawer>
         </mat-drawer-container>
-        <!-- Sidenav content -->
+        <!-- Admin Sidenav -->
 
         <!-- Navigation -->
         <mat-toolbar color="primary">
             <button *ngIf='isUserAdmin()' mat-icon-button type="button" (click)="drawer.toggle()">
                 <mat-icon>menu</mat-icon>
             </button>
-                <a class="nav-button" routerLink="/home">Home</a>
+            <a class="nav-button" routerLink="/home">Home</a>
             <div class="nav-auth-button" *ngIf='!isUserAuthenticated'>
                 <a class="nav-button" routerLink="/authentication/login">Login</a>
                 <a class="nav-button" routerLink="/authentication/register">Register</a>

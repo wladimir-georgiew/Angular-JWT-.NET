@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using ArtCave.Web.Services.Categories;
 
 namespace ArtCave.Web
 {
@@ -61,6 +62,7 @@ namespace ArtCave.Web
 
             builder.Services.AddScoped(typeof(IBaseCrudOperations<>), typeof(BaseCrudOperations<>));
             builder.Services.AddTransient<IAccountService, AccountService>();
+            builder.Services.AddTransient<ICategoryService, CategoryService>();
 
             var app = builder.Build();
 

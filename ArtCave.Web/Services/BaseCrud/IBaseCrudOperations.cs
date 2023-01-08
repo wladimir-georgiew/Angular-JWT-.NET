@@ -3,7 +3,7 @@
     public interface IBaseCrudOperations<TEntity>
          where TEntity : class
     {
-        public Task<TEntity[]> GetAllAsync();
+        public IQueryable<TEntity> GetAllAsQuery();
 
         public Task<TEntity> AddAsync(TEntity entity);
 

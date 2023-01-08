@@ -1,4 +1,5 @@
 ﻿using ArtCave.Web.Data.Entities;
+using ArtCave.Web.DTO.Admin.Categories;
 using ArtCave.Web.DTO.Registration;
 using AutoMapper;
 
@@ -9,7 +10,10 @@ namespace ArtCave.Web.Mapping
         public MappingProfile()
         {
             CreateMap<UserRegistrationRequest, ApplicationUser>()
-                .ForMember(u => u.UserName, opt => opt.MapFrom(x => x.Email));
+                .ForMember(d => d.UserName, opt => opt.MapFrom(src => src.Email));
+
+            CreateMap<CreateCategoryRequest ,Category>()
+                .ForMember(d => d.Name, opt => opt.MapFrom(src => src.CategoryName));
         }
     }
 }

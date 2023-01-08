@@ -15,9 +15,9 @@ namespace ArtCave.Web.Services.BaseCrud
             this.DbSet = this.Context.Set<TEntity>();
         }
 
-        public virtual Task<TEntity[]> GetAllAsync()
+        public virtual IQueryable<TEntity> GetAllAsQuery()
         {
-            return this.DbSet.ToArrayAsync();
+            return this.DbSet.AsQueryable();
         }
 
         public virtual async Task<TEntity> AddAsync(TEntity entity)

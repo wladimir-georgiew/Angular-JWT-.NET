@@ -6,6 +6,18 @@ namespace ArtCave.Web.Data
 {
     public class DataSeeder
     {
+        private class UserRoleDto
+        {
+            public UserRoleDto(string userEmail, string roleName)
+            {
+                this.UserEmail = userEmail;
+                this.RoleName = roleName;
+            }
+
+            public string UserEmail { get; set; }
+            public string RoleName { get; set; }
+        }
+
         public static async void Initialize(WebApplication app)
         {
             using var scope = app.Services.CreateScope();
@@ -27,9 +39,9 @@ namespace ArtCave.Web.Data
                 }
             }
 
-            await SeedUsersAndRoles(context, userManager, new Tuple<string, string>[]
+            await SeedUsersAndRoles(context, userManager, new UserRoleDto[]
             {
-                new Tuple<string,string>("admin@abv.bg", Constants.Constants.IdentityRoles.Admin)
+                new UserRoleDto("admin@abv.bg", Constants.Constants.IdentityRoles.Admin)
             });
 
 
@@ -38,21 +50,22 @@ namespace ArtCave.Web.Data
 
         /// <summary>
         /// Seed users, roles and assigns the user to the role
+        /// <see />
         /// </summary>
         /// <param name="context"></param>
         /// <param name="userManager"></param>
-        /// <param name="emailRoleKvps"></param>
+        /// <param name="data"></param>
         /// <returns></returns>
-        private static async Task SeedUsersAndRoles(ArtCaveDbContext context, UserManager<ApplicationUser> userManager, Tuple<string, string>[] emailRoleKvps)
+        private static async Task SeedUsersAndRoles(ArtCaveDbContext context, UserManager<ApplicationUser> userManager, UserRoleDto[] data)
         {
-            foreach (var emailRoleKvp in emailRoleKvps)
+            foreach (var userRoleDto in data)
             {
                 var user = new ApplicationUser
                 {
-                    UserName = emailRoleKvp.Item1,
-                    Email = emailRoleKvp.Item1,
-                    NormalizedEmail = emailRoleKvp.Item1.ToUpper(),
-                    NormalizedUserName = emailRoleKvp.Item1.ToUpper(),
+                    UserName = userRoleDto.UserEmail,
+                    Email = userRoleDto.UserEmail,
+                    NormalizedEmail = userRoleDto.UserEmail.ToUpper(),
+                    NormalizedUserName = userRoleDto.UserEmail.ToUpper(),
                     PhoneNumber = "",
                     EmailConfirmed = true,
                     PhoneNumberConfirmed = true,
@@ -70,15 +83,15 @@ namespace ArtCave.Web.Data
 
                     await userStore.CreateAsync(user);
 
-                    await AssignUserToAdminRole(userManager, user.Email);
+                    await AssignUserToRole(userManager, user.Email, Constants.Constants.IdentityRoles.Admin);
                 }
             }
         }
 
-        private static async Task<IdentityResult> AssignUserToAdminRole(UserManager<ApplicationUser> userManager, string email)
+        private static async Task<IdentityResult> AssignUserToRole(UserManager<ApplicationUser> userManager, string email, string role)
         {
             ApplicationUser user = await userManager.FindByEmailAsync(email);
-            var result = await userManager.AddToRoleAsync(user, Constants.Constants.IdentityRoles.Admin);
+            var result = await userManager.AddToRoleAsync(user, role);
 
             return result;
         }

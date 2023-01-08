@@ -64,6 +64,8 @@ namespace ArtCave.Web
 
             var app = builder.Build();
 
+            DataSeeder.Initialize(app);
+
             app.UseCors(options => options
                         .AllowAnyOrigin()
                         .AllowAnyHeader()

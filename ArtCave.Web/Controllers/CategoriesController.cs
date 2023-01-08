@@ -19,11 +19,16 @@ namespace ArtCave.Web.Controllers
 
         [HttpPost("add")]
         [ProducesResponseType(200, Type = typeof(int))]
-        //[Authorize]
+        [Authorize]
         public async Task<ActionResult> AddCategory(CreateCategoryRequest categoryRequest)
         {
             var category = _categoryService.MapToCategory(categoryRequest);
             var res = await _categoryService.AddAsync(category);
+
+            if (res == null)
+            {
+                return BadRequest("Category with such name already exists");
+            }
 
             return Ok(res.Id);
         }

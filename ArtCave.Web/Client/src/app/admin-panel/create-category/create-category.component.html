@@ -1,0 +1,24 @@
+<div class="card">
+    <div class="card-body">
+        <h1 class="card-title">Create Category</h1>
+
+        <div *ngIf="showError" class="alert alert-danger" role="alert">
+            <span [innerHTML]="errorMessage"></span>
+          </div>
+
+        <form [formGroup]="createForm" autocomplete="off" novalidate (ngSubmit)="CreateCategory(createForm.value)">
+            <div class="mb-3 row">
+                <label for="categoryName" class="col-form-label col-sm-2">First Name:</label>
+                <div class="col-md-5">
+                    <input type="text" id="categoryName" formControlName="categoryName" class="form-control" />
+                </div>
+            </div>
+            <br>
+            <div class="mb-3 row">
+                <div class="col-md-1">          
+                    <button type="submit" class="btn btn-info" [disabled]="!createForm.valid">Register</button>
+                </div>
+            </div>
+        </form>
+    </div>
+  </div>

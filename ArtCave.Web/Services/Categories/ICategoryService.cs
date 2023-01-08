@@ -7,5 +7,7 @@ namespace ArtCave.Web.Services.Categories
     public interface ICategoryService : IBaseCrudOperations<Category>
     {
         Category MapToCategory(CreateCategoryRequest dto);
+
+        new Task<Category?> AddAsync(Category category);
     }
 }

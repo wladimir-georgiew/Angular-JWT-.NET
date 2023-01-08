@@ -1,12 +1,7 @@
-﻿using ArtCave.Data.Entities;
-using ArtCave.Web.DTO.Login;
+﻿using ArtCave.Web.DTO.Login;
 using ArtCave.Web.DTO.Registration;
-using ArtCave.Web.JwtFeatures;
 using ArtCave.Web.Services.Account;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System.IdentityModel.Tokens.Jwt;
 
 namespace ArtCave.Web.Controllers
 {

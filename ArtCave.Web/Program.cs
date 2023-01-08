@@ -1,4 +1,4 @@
-using ArtCave.Data.Entities;
+using ArtCave.Web.Data.Entities;
 using ArtCave.Web.Data;
 using ArtCave.Web.JwtFeatures;
 using ArtCave.Web.Services.Account;

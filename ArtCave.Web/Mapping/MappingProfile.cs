@@ -1,4 +1,4 @@
-﻿using ArtCave.Data.Entities;
+﻿using ArtCave.Web.Data.Entities;
 using ArtCave.Web.DTO.Registration;
 using AutoMapper;
 

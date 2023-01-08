@@ -1,8 +1,6 @@
-﻿using ArtCave.Data.Entities;
-using ArtCave.Web.Data.Seeders;
+﻿using ArtCave.Web.Data.Entities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System.Reflection.Emit;
 
 namespace ArtCave.Web.Data
 {
@@ -13,11 +11,16 @@ namespace ArtCave.Web.Data
         {
         }
 
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Country> Countries { get; set; }
+        public DbSet<Item> Items { get; set; }
+        public DbSet<Photo> Photos { get; set; }
+        public DbSet<Stand> Stands { get; set; }
+        public DbSet<Tag> Tags { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-
-            builder.ApplyConfiguration(new RoleConfigurationSeeder());
         }
     }
 }

@@ -1,10 +1,10 @@
-﻿using ArtCave.Data.Entities;
+﻿using ArtCave.Web.Data;
+using ArtCave.Web.Data.Entities;
 using ArtCave.Web.DTO.Login;
 using ArtCave.Web.DTO.Registration;
 using ArtCave.Web.JwtFeatures;
 using AutoMapper;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
 using System.IdentityModel.Tokens.Jwt;
 
 namespace ArtCave.Web.Services.Account

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { StandService } from './stand.service';
+import { RequestHandlerService } from 'src/app/services/request-handler.service';
 
 @Component({
   selector: 'app-stand',
@@ -7,17 +7,17 @@ import { StandService } from './stand.service';
   styleUrls: ['./stand.component.css']
 })
 export class StandComponent implements OnInit {
-  public stands: [] = [];
-  constructor(private standService: StandService) { }
+  public stands: string[] = [];
+  constructor(private requestHandlerService: RequestHandlerService) { }
 
   ngOnInit(): void {
       this.getStands();
   }
 
   public getStands() {
-    this.standService.GetStands('stands/all')
+    this.requestHandlerService.HttpGet('stands/all')
       .subscribe(res => {
-        this.stands = res as [];
+        this.stands = res as string[];
       })
   }
 }

@@ -13,6 +13,7 @@ namespace ArtCave.Web.Controllers
         }
 
         [HttpGet("all")]
+        [Authorize]
         public IActionResult GetAllStands()
         {
             var mockStands = new List<string>()

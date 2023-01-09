@@ -12,6 +12,7 @@ namespace ArtCave.Web.Data
         }
 
         public DbSet<Category> Categories { get; set; }
+        public DbSet<Subcategory> Subcategories { get; set; }
         public DbSet<Country> Countries { get; set; }
         public DbSet<Item> Items { get; set; }
         public DbSet<Photo> Photos { get; set; }

@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { HomeComponent } from './components/home/home.component';
 import { StandComponent } from './components/stand/stand.component';
 import { ForbiddenComponent } from './error-pages/forbidden/forbidden/forbidden.component';
 import { NotFoundComponent } from './error-pages/not-found/not-found.component';
 import { AuthGuard } from './guards/auth.guard';
 import { RoleGuard } from './guards/role.guard';
-
-import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },

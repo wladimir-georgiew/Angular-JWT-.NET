@@ -62,6 +62,14 @@ export class ErrorHandlerService implements HttpInterceptor {
       
       return message.slice(0, -4);
     }
+    else if(this.router.url.includes('/admin-panel')){
+      let aspErrorResponseObject = error.error.errors;
+      let result = Object.entries(aspErrorResponseObject)
+                         .map(x => x[1])
+                         .join('; ');
+
+      return result;
+    }
     else{
       return error.error ? error.error : error.message;
     }

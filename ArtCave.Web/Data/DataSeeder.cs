@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace ArtCave.Web.Data
 {
-    public class DataSeeder
+    public static class DataSeeder
     {
         private class CategorySubcategories
         {

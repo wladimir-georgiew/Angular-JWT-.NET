@@ -1,3 +1,12 @@
+.register-wrapper{
+    height:100%;
+    width:100%;
+    background-image: url("../../../resources/auth/background-2.jpg");
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+}
+
 em{
     color: #e71515;
     font-weight: bold;
@@ -6,7 +15,12 @@ em{
     border-color: red;
 }
 .card{
-    margin-top: 10px;
-    background-color: #fff;
-    box-shadow: 1px 1px 1px #cabcbc;
+    background: rgba(1, 2, 1, 0.635);
+    place-self: center;
+    border:none;
+    color:white;
+    text-align: center;
+}
+.form-label{
+    width:100%;
 }
